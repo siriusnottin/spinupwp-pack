@@ -6,7 +6,7 @@ const DatabaseSchema = coda.makeObjectSchema({
   properties: {
     server: { type: coda.ValueType.String },
     host: { type: coda.ValueType.String },
-    port: { type: coda.ValueType.Number },
+    port: { type: coda.ValueType.String },
   },
 });
 
