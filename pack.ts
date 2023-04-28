@@ -9,6 +9,8 @@ pack.setUserAuthentication({
   instructionsUrl: "https://spinupwp.app/settings#api-tokens",
 });
 
+pack.addNetworkDomain("api.spinupwp.app");
+
 pack.addSyncTable({
   name: "Servers",
   schema: schemas.ServerSchema,
