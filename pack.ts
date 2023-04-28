@@ -1,5 +1,6 @@
 import * as coda from "@codahq/packs-sdk";
 import * as schemas from "./schemas";
+import * as helpers from "./helpers";
 
 
 export const pack = coda.newPack();
@@ -20,8 +21,7 @@ pack.addSyncTable({
     description: "Sync servers",
     parameters: [],
     execute: async function ([], context) {
-
-      return
-
+      return helpers.SyncServers(context);
     },
-  });
+  },
+});

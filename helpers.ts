@@ -17,23 +17,22 @@ function snakeToCamel(obj: any) {
 // ====================
 
 function serverParser(servers: types.ServerResponse[]): types.Server[] {
-  // transform each field of the api response to camel case
-  // and map id to serverId
-  for (let server of servers) {
-    server.map((server: types.Server) => {
-      server.serverId = server.id;
-      return snakeToCamel(server);
-    }
-  }
+  return servers.map((server) => {
+    const modifiedServer = { ...server, serverId: server.id };
+    delete modifiedServer.id;
+    return snakeToCamel(modifiedServer) as types.Server;
+  });
 }
 
 // return a list of servers
-export async function SyncServers(context: coda.SyncExecutionContext): Promise<coda.GenericSyncFormula> {
-  const response = await context.fetcher.fetch({ method: "GET", url: `${ApiUrl}/servers` });
-  const servers = (response.body as types.ApiResponse).data as types.ServerResponse[];
+export async function SyncServers(context: coda.SyncExecutionContext): Promise<coda.GenericSyncFormulaResult> {
+  let url = nextPageUrl ? nextPageUrl : `${ApiUrl}/servers`;
+  const response = await context.fetcher.fetch({ method: "GET", url });
+  const servers = response.body.data as types.ServerResponse[];
+  let nextPageUrl = (response.body.pagination as types.ApiResponse["pagination"])?.next;
   return {
     result: serverParser(servers),
-    continuation: null,
+    continuation: nextPageUrl ? { nextPageUrl } : undefined,
   };
 }
 
