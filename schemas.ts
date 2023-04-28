@@ -41,6 +41,8 @@ export const ServerSchema = coda.makeObjectSchema({
     createdAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
     status: { type: coda.ValueType.String },
   },
+  idProperty: "serverId",
+  displayProperty: "name",
 });
 
 // Sites
