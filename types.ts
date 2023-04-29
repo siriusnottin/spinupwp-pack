@@ -1,5 +1,11 @@
 // servers
 
+enum ServerStatus {
+  Provisioning = "provisioning",
+  Provisioned = "provisioned",
+  Failed = "failed",
+}
+
 export interface ServerResponse {
   id: number;
   name: string;
@@ -28,7 +34,7 @@ export interface ServerResponse {
   upgrade_required: boolean;
   install_notes: string | null;
   created_at: string;
-  status: "provisioning" | "provisioned" | "failed";
+  status: ServerStatus;
 }
 
 export interface Server {
@@ -59,12 +65,18 @@ export interface Server {
   upgradeRequired: boolean;
   installNotes: string | null;
   createdAt: string;
-  status: string;
+  status: ServerStatus;
 }
 
 // sites
 
-type SiteResponse = {
+enum SiteStatus {
+  Deployed = "deployed",
+  Deploying = "deploying",
+  Failed = "failed",
+}
+
+export type SiteResponse = {
   id: number;
   server_id: number;
   domain: string;
@@ -122,12 +134,15 @@ type SiteResponse = {
     username: string;
   };
   created_at: string;
-  status: "deploying" | "deployed" | "failed";
+  status: SiteStatus;
 };
 
 export interface Site {
   siteId: number;
-  serverId: number;
+  server: {
+    serverId: number;
+    name: "Not found";
+  };
   domain: string;
   additionalDomains: {
     domain: string;
@@ -183,9 +198,18 @@ export interface Site {
     username: string;
   };
   createdAt: string;
-  status: string;
+  status: SiteStatus;
 }
 
+
+enum EventStatus {
+  Queued = "queued",
+  Creating = "creating",
+  Updating = "updating",
+  Deleting = "deleting",
+  Deployed = "deployed",
+  Failed = "failed"
+}
 
 // events
 
@@ -194,7 +218,7 @@ export interface EventResponse {
   initiated_by: string;
   server_id: number;
   name: string;
-  status: "queued" | "creating" | "updating" | "deleting" | "deployed" | "failed";
+  status: EventStatus;
   output: any | null;
   created_at: string;
   started_at: string;
@@ -206,7 +230,7 @@ export interface Event {
   initiatedBy: string;
   serverId: number;
   name: string;
-  status: string;
+  status: EventStatus;
   output: any | null;
   createdAt: string;
   startedAt: string;

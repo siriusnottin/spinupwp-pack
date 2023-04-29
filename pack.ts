@@ -25,3 +25,17 @@ pack.addSyncTable({
     },
   },
 });
+
+pack.addSyncTable({
+  name: "Sites",
+  schema: schemas.SiteSchema,
+  identityName: "Site",
+  formula: {
+    name: "SyncSites",
+    description: "Sync sites",
+    parameters: [],
+    execute: async function ([], context) {
+      return helpers.SyncSites(context);
+    },
+  },
+});

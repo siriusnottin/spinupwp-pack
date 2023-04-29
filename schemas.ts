@@ -45,6 +45,98 @@ export const ServerSchema = coda.makeObjectSchema({
   displayProperty: "name",
 });
 
+// create relation between Server and Site
+const ServerReferenceSchema = coda.makeReferenceSchemaFromObjectSchema(ServerSchema, "Server");
+
 // Sites
+const SiteAdditionalDomainsSchema = coda.makeObjectSchema({
+  properties: {
+    domain: { type: coda.ValueType.String },
+    redirect: {
+      type: coda.ValueType.Object,
+      properties: {
+        enabled: { type: coda.ValueType.Boolean },
+      },
+    },
+    createdAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
+  },
+});
+
+export const SiteNginxSchema = coda.makeObjectSchema({
+  properties: {
+    uploadsDirectoryProtected: { type: coda.ValueType.Boolean },
+    xmlrpcProtected: { type: coda.ValueType.Boolean },
+    subdirectoryRewriteInPlace: { type: coda.ValueType.Boolean },
+  },
+});
+
+const SiteDatabaseSchema = coda.makeObjectSchema({
+  properties: {
+    databaseId: { type: coda.ValueType.Number, fromKey: "id" },
+    userId: { type: coda.ValueType.Number },
+    tablePrefix: { type: coda.ValueType.String },
+  },
+});
+
+const SiteBackupsSchema = coda.makeObjectSchema({
+  properties: {
+    files: { type: coda.ValueType.Boolean },
+    database: { type: coda.ValueType.Boolean },
+    pathToExclude: { type: coda.ValueType.String },
+    retentionPeriod: { type: coda.ValueType.Number, codaType: coda.ValueHintType.Duration },
+  },
+  nextRunTime: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
+  storageProvider: {
+    type: coda.ValueType.Object, properties: {
+      storageProviderId: { type: coda.ValueType.Number },
+      region: { type: coda.ValueType.String },
+      bucket: { type: coda.ValueType.String },
+    },
+  },
+});
+
+const SiteGitSchema = coda.makeObjectSchema({
+  properties: {
+    repo: { type: coda.ValueType.String },
+    branch: { type: coda.ValueType.String },
+    deployScript: { type: coda.ValueType.String },
+    pushEnabled: { type: coda.ValueType.Boolean },
+    deploymentUrl: { type: coda.ValueType.String, codaType: coda.ValueHintType.Url },
+  },
+});
+
+const SiteBasicAuthSchema = coda.makeObjectSchema({
+  properties: {
+    enabled: { type: coda.ValueType.Boolean },
+    username: { type: coda.ValueType.String },
+  },
+});
+
+export const SiteSchema = coda.makeObjectSchema({
+  properties: {
+    siteId: { type: coda.ValueType.Number },
+    server: ServerReferenceSchema,
+    domain: { type: coda.ValueType.String },
+    additionalDomains: SiteAdditionalDomainsSchema,
+    siteUser: { type: coda.ValueType.String },
+    phpVersion: { type: coda.ValueType.String },
+    publicFolder: { type: coda.ValueType.String },
+    isWordpress: { type: coda.ValueType.Boolean },
+    pageCache: { type: coda.ValueType.Object, properties: { enabled: { type: coda.ValueType.Boolean } } },
+    https: { type: coda.ValueType.Object, properties: { enabled: { type: coda.ValueType.Boolean } } },
+    nginx: SiteNginxSchema,
+    database: SiteDatabaseSchema,
+    backups: SiteBackupsSchema,
+    wpCoreUpdate: { type: coda.ValueType.Boolean },
+    wpThemeUpdates: { type: coda.ValueType.Number },
+    wpPluginUpdates: { type: coda.ValueType.Number },
+    git: SiteGitSchema,
+    basicAuth: SiteBasicAuthSchema,
+    createdAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
+    status: { type: coda.ValueType.String },
+  },
+  idProperty: "siteId",
+  displayProperty: "domain",
+});
 
 // Events

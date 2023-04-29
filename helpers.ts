@@ -54,7 +54,30 @@ export async function SyncServers(context: coda.SyncExecutionContext): Promise<c
 // SITES
 // ====================
 
-// parser fn for the applications api response
+function sitesParser(sites: types.SiteResponse[]): types.Site[] {
+  return sites.map((site) => {
+    const server: types.Site["server"] = {
+      serverId: site.server_id,
+      name: "Not found",
+    }
+    const modifiedSite = { siteId: site.id, server, ...site };
+    delete modifiedSite.id, modifiedSite.server_id; // we dont need these returned in the formula
+    return snakeToCamel(modifiedSite) as types.Site;
+  });
+}
+
+export async function SyncSites(context: coda.SyncExecutionContext): Promise<coda.GenericSyncFormulaResult> {
+  let url = (context.sync.continuation?.nextPageUrl as string | undefined) || `${ApiUrl}/sites`
+  url = coda.withQueryParams(url, { limit: 100 });
+  const response = await context.fetcher.fetch({ method: "GET", url }) as types.ApiResponse;
+  const sites = response.body.data as types.SiteResponse[] | undefined;
+  const nextUrl = response.body.pagination.next;
+  return {
+    result: (sites) ? sitesParser(sites) : undefined,
+    continuation: (nextUrl) ? { nextPageUrl: nextUrl } : undefined,
+  };
+}
+
 // return a list of applications
 
 // sync table fn for the applications 
