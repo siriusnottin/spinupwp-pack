@@ -66,6 +66,7 @@ export interface Server {
   installNotes: string | null;
   createdAt: string;
   status: ServerStatus;
+  spinupUrl: string;
 }
 
 // sites
@@ -199,6 +200,7 @@ export interface Site {
   };
   createdAt: string;
   status: SiteStatus;
+  spinupUrl: string;
 }
 
 

@@ -32,6 +32,7 @@ function serversParser(servers: types.ServerResponse[]): types.Server[] {
       serverId: id,
       ...rest,
       diskSpace: parsedDiskSpace,
+      spinupUrl: "https://spinupwp.app/servers/" + id,
     };
     return snakeToCamel(parsedServer) as types.Server;
   });
@@ -60,7 +61,12 @@ function sitesParser(sites: types.SiteResponse[]): types.Site[] {
       serverId: site.server_id,
       name: "Not found",
     }
-    const modifiedSite = { siteId: site.id, server, ...site };
+    const modifiedSite = {
+      siteId: site.id,
+      server,
+      ...site,
+      spinupUrl: "https://spinupwp.app/sites/" + site.id,
+    };
     delete modifiedSite.id, modifiedSite.server_id; // we dont need these returned in the formula
     return snakeToCamel(modifiedSite) as types.Site;
   });
