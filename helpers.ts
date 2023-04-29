@@ -4,7 +4,7 @@ import * as types from "./types";
 // declare api url
 export const ApiUrl = "https://api.spinupwp.app/v1";
 
-function snakeToCamel(obj: any) {
+function snakeToCamel(obj: { [key: string]: any }) {
   return Object.fromEntries(
     Object.entries(obj).map(([key, value]) => {
       return [key.replace(/_(\w)/g, (_, c) => c.toUpperCase()), value];
