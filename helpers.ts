@@ -2,6 +2,7 @@ import * as coda from "@codahq/packs-sdk";
 import * as types from "./types";
 
 // declare api url
+export const AppUrl = "https://spinupwp.app";
 export const ApiUrl = "https://api.spinupwp.app/v1";
 
 function snakeToCamel(obj: { [key: string]: any }) {
@@ -32,7 +33,7 @@ function serversParser(servers: types.ServerResponse[]): types.Server[] {
       serverId: id,
       ...rest,
       diskSpace: parsedDiskSpace,
-      spinupUrl: "https://spinupwp.app/servers/" + id,
+      spinupUrl: `${AppUrl}/servers/${id}`,
     };
     return snakeToCamel(parsedServer) as types.Server;
   });
@@ -65,7 +66,7 @@ function sitesParser(sites: types.SiteResponse[]): types.Site[] {
       siteId: site.id,
       server,
       ...site,
-      spinupUrl: "https://spinupwp.app/sites/" + site.id,
+      spinupUrl: `${AppUrl}/sites/${site.id}`,
     };
     delete modifiedSite.id, modifiedSite.server_id; // we dont need these returned in the formula
     return snakeToCamel(modifiedSite) as types.Site;

@@ -7,7 +7,7 @@ export const pack = coda.newPack();
 
 pack.setUserAuthentication({
   type: coda.AuthenticationType.HeaderBearerToken,
-  instructionsUrl: "https://spinupwp.app/settings#api-tokens",
+  instructionsUrl: `${helpers.AppUrl}/settings#api-tokens`,
 });
 
 pack.addNetworkDomain("api.spinupwp.app");
