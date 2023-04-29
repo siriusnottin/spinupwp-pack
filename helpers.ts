@@ -48,8 +48,6 @@ export async function SyncServers(context: coda.SyncExecutionContext): Promise<c
   };
 }
 
-// sync table fn for the servers
-
 // formula fn for a server info
 
 // ====================
