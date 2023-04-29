@@ -58,16 +58,19 @@ export async function SyncServers(context: coda.SyncExecutionContext): Promise<c
 
 function sitesParser(sites: types.SiteResponse[]): types.Site[] {
   return sites.map((site) => {
-    const { id, ...rest } = site;
+    const { id, https, domain, is_wordpress, ...rest } = site;
     const server: types.Site["server"] = {
       serverId: site.server_id,
       name: "Not found",
     }
+    const siteUrl = `${https.enabled ? 'https' : 'http'}://${domain}`;
     const modifiedSite = {
       siteId: id,
       server,
       ...site,
       spinupUrl: `${AppUrl}/sites/${id}`,
+      siteUrl,
+      siteAdminUrl: (is_wordpress) ? `${siteUrl}/wp-admin` : undefined,
     };
     delete modifiedSite.id, modifiedSite.server_id; // we dont need these returned in the formula
     return snakeToCamel(modifiedSite) as types.Site;

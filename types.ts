@@ -201,6 +201,8 @@ export interface Site {
   createdAt: string;
   status: SiteStatus;
   spinupUrl: string;
+  siteUrl: string;
+  siteAdminUrl: string | null;
 }
 
 

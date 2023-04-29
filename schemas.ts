@@ -136,6 +136,8 @@ export const SiteSchema = coda.makeObjectSchema({
     createdAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
     status: { type: coda.ValueType.String },
     spinupUrl: { type: coda.ValueType.String, codaType: coda.ValueHintType.Url },
+    siteUrl: { type: coda.ValueType.String, codaType: coda.ValueHintType.Url },
+    siteAdminUrl: { type: coda.ValueType.String, codaType: coda.ValueHintType.Url },
   },
   idProperty: "siteId",
   displayProperty: "domain",
