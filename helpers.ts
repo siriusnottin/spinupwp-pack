@@ -5,6 +5,7 @@ import * as types from "./types";
 export const ApiUrl = "https://api.spinupwp.app/v1";
 
 function snakeToCamel(obj: { [key: string]: any }) {
+  // transform snake_case to camelCase
   return Object.fromEntries(
     Object.entries(obj).map(([key, value]) => {
       return [key.replace(/_(\w)/g, (_, c) => c.toUpperCase()), value];
