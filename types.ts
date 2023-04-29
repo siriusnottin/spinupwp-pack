@@ -255,16 +255,16 @@ enum ErrorCode {
 }
 
 const errorCodeMeaning: { [key in ErrorCode]: string } = {
-  [ErrorCode.BadRequest]: 'Bad Request – Your request is invalid.',
-  [ErrorCode.Unauthorized]: 'Unauthorized – Your API token is wrong or no longer valid.',
-  [ErrorCode.PaymentRequired]: 'Payment Required – The team does not have a valid subscription.',
-  [ErrorCode.Forbidden]: 'Forbidden – You do not have permission to access the endpoint.',
-  [ErrorCode.NotFound]: 'Not Found – The specified resource could not be found.',
-  [ErrorCode.MethodNotAllowed]: 'Method Not Allowed – You tried to access an endpoint with an invalid method.',
-  [ErrorCode.ValidationError]: 'Validation Error – Invalid or missing parameters.',
-  [ErrorCode.TooManyAttempts]: 'Too Many Attempts – You’ve hit the rate limit on API requests.',
-  [ErrorCode.InternalServerError]: 'Internal Server Error – We had a problem with our server. Try again later.',
-  [ErrorCode.ServiceUnavailable]: 'Service Unavailable – We’re temporarily offline for maintenance. Please try again later.'
+  [ErrorCode.BadRequest]: 'Bad Request — Your request is invalid.',
+  [ErrorCode.Unauthorized]: 'Unauthorized — Your API token is wrong or no longer valid.',
+  [ErrorCode.PaymentRequired]: 'Payment Required — The team does not have a valid subscription.',
+  [ErrorCode.Forbidden]: 'Forbidden — You do not have permission to access the endpoint.',
+  [ErrorCode.NotFound]: 'Not Found — The specified resource could not be found.',
+  [ErrorCode.MethodNotAllowed]: 'Method Not Allowed — You tried to access an endpoint with an invalid method.',
+  [ErrorCode.ValidationError]: 'Validation Error — Invalid or missing parameters.',
+  [ErrorCode.TooManyAttempts]: 'Too Many Attempts — You\'ve hit the rate limit on API requests.',
+  [ErrorCode.InternalServerError]: 'Internal Server Error — We had a problem with our server. Try again later.',
+  [ErrorCode.ServiceUnavailable]: 'Service Unavailable — We\'re temporarily offline for maintenance. Please try again later.'
 };
 
 export interface ApiResponse {
