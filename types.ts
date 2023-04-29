@@ -244,11 +244,13 @@ const errorCodeMeaning: { [key in ErrorCode]: string } = {
 };
 
 export interface ApiResponse {
-  data: ServerResponse[] | SiteResponse[] | EventResponse[]
-  pagination: {
-    previous: string | null;
-    next: string | null;
-    per_page: number;
-    count: number;
+  body: {
+    data: ServerResponse[] | SiteResponse[] | EventResponse[] | undefined
+    pagination: {
+      previous: string | null;
+      next: string | null;
+      per_page: number;
+      count: number;
+    };
   };
 }

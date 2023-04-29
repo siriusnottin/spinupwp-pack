@@ -17,23 +17,34 @@ function snakeToCamel(obj: { [key: string]: any }) {
 // SERVERS
 // ====================
 
-function serverParser(servers: types.ServerResponse[]): types.Server[] {
+function BytesToGigaBytes(bytes: number): number {
+  return bytes / 1000000000;
+}
+
+function serversParser(servers: types.ServerResponse[]): types.Server[] {
   return servers.map((server) => {
-    const modifiedServer = { ...server, serverId: server.id };
-    delete modifiedServer.id;
-    return snakeToCamel(modifiedServer) as types.Server;
+    const { id, disk_space, ...rest } = server;
+    const parsedDiskSpace = {};
+    for (const prop in disk_space) {
+      parsedDiskSpace[prop] = (prop === "updated_at") ? disk_space[prop] : BytesToGigaBytes(disk_space[prop]);
+    };
+    const parsedServer = {
+      serverId: id,
+      ...rest,
+      diskSpace: parsedDiskSpace,
+    };
+    return snakeToCamel(parsedServer) as types.Server;
   });
 }
 
-// return a list of servers
 export async function SyncServers(context: coda.SyncExecutionContext): Promise<coda.GenericSyncFormulaResult> {
-  let url = nextPageUrl ? nextPageUrl : `${ApiUrl}/servers`;
-  const response = await context.fetcher.fetch({ method: "GET", url });
-  const servers = response.body.data as types.ServerResponse[];
-  let nextPageUrl = (response.body.pagination as types.ApiResponse["pagination"])?.next;
+  const url = (context.sync.continuation?.nextPageUrl as string | undefined) || `${ApiUrl}/servers`
+  const response = await context.fetcher.fetch({ method: "GET", url }) as types.ApiResponse;
+  const servers = response.body.data as types.ServerResponse[] | undefined;
+  const nextUrl = response.body.pagination.next;
   return {
-    result: serverParser(servers),
-    continuation: nextPageUrl ? { nextPageUrl } : undefined,
+    result: (servers) ? serversParser(servers) : undefined,
+    continuation: (nextUrl) ? { nextPageUrl: nextUrl } : undefined,
   };
 }
 
