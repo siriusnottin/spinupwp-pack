@@ -144,7 +144,7 @@ export const SiteSchema = coda.makeObjectSchema({
     wpPluginUpdates: { type: coda.ValueType.Number },
     git: SiteGitSchema,
     basicAuth: SiteBasicAuthSchema,
-    createdAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
+    createdAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.DateTime },
     status: { type: coda.ValueType.String },
     spinupUrl: { type: coda.ValueType.String, codaType: coda.ValueHintType.Url },
     siteUrl: { type: coda.ValueType.String, codaType: coda.ValueHintType.Url },
