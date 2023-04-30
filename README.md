@@ -10,7 +10,7 @@ Manage your servers and applications in Coda.
 
 - [ ] Convert `Server.database.port` type string into a number
 - [ ] Add pagination parameter to sync table
-- [ ] New table for Events
+- [X] New table for Events
 - [ ] Site/Server/Event formula
 - [ ] Site/Server/Event card
 - [ ] Site/Server action buttons
@@ -21,6 +21,7 @@ Manage your servers and applications in Coda.
 ## Changelog
 
 v1 - Initial release
+v2 - Added Events table
 
 ## License
 

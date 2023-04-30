@@ -82,6 +82,28 @@ export function sitesParser(sites: types.SiteResponse[]): types.Site[] {
 
 // formula fn for an application info
 
-// sync table fn for the applications 
+// ====================
+// EVENTS
+// ====================
 
-// formula fn for an application info
+export function eventsParser(events: types.EventResponse[]): types.Event[] {
+  return events.map((event) => {
+    const { id, server_id, site_id, ...rest } = event;
+    const server: types.Event["server"] = {
+      serverId: server_id,
+      name: "Not found",
+    }
+    const site: types.Event["site"] = {
+      siteId: site_id,
+      domain: "Not found",
+    }
+    const parsedEvent = {
+      ...rest,
+      eventId: id,
+      server: (server.serverId) ? server : undefined,
+      site: (site.siteId) ? site : undefined
+    };
+    console.log("parsedEvent", parsedEvent);
+    return snakeToCamel(parsedEvent) as types.Event;
+  });
+}

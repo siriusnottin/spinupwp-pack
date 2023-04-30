@@ -117,9 +117,9 @@ const SiteBasicAuthSchema = coda.makeObjectSchema({
 
 export const SiteSchema = coda.makeObjectSchema({
   properties: {
-    siteId: { type: coda.ValueType.Number },
+    siteId: { type: coda.ValueType.Number, required: true },
     server: ServerReferenceSchema,
-    domain: { type: coda.ValueType.String },
+    domain: { type: coda.ValueType.String, required: true },
     additionalDomains: SiteAdditionalDomainsSchema,
     siteUser: { type: coda.ValueType.String },
     userAuth: { type: coda.ValueType.String },
@@ -154,4 +154,23 @@ export const SiteSchema = coda.makeObjectSchema({
   displayProperty: "domain",
 });
 
+const SiteReferenceSchema = coda.makeReferenceSchemaFromObjectSchema(SiteSchema, "Site");
+
 // Events
+
+export const EventSchema = coda.makeObjectSchema({
+  properties: {
+    eventId: { type: coda.ValueType.Number },
+    initiatedBy: { type: coda.ValueType.String },
+    server: ServerReferenceSchema,
+    site: SiteReferenceSchema,
+    name: { type: coda.ValueType.String },
+    status: { type: coda.ValueType.String },
+    output: { type: coda.ValueType.String },
+    createdAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
+    startedAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
+    finishedAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
+  },
+  idProperty: "eventId",
+  displayProperty: "name",
+});

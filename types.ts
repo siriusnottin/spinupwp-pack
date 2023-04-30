@@ -69,6 +69,11 @@ export interface Server {
   spinupUrl: string;
 }
 
+interface ServerReference {
+  serverId: number;
+  name: "Not found";
+}
+
 // sites
 
 enum SiteStatus {
@@ -147,10 +152,7 @@ export interface SiteResponse {
 
 export interface Site {
   siteId: number;
-  server: {
-    serverId: number;
-    name: "Not found";
-  };
+  server: ServerReference;
   domain: string;
   additionalDomains: {
     domain: string;
@@ -219,6 +221,10 @@ export interface Site {
   siteAdminUrl: string | null;
 }
 
+interface SiteReference {
+  siteId: number;
+  domain: "Not found";
+}
 
 enum EventStatus {
   Queued = "queued",
@@ -235,6 +241,7 @@ export interface EventResponse {
   id: number;
   initiated_by: string;
   server_id?: number;
+  site_id?: number;
   name: string;
   status: EventStatus;
   output: string | null;
@@ -246,7 +253,8 @@ export interface EventResponse {
 export interface Event {
   eventId: number;
   initiatedBy: string;
-  serverId: number;
+  server: ServerReference;
+  site: SiteReference;
   name: string;
   status: EventStatus;
   output: string | null;

@@ -43,3 +43,19 @@ pack.addSyncTable({
     },
   },
 });
+
+pack.addSyncTable({
+  name: "Events",
+  schema: schemas.EventSchema,
+  identityName: "Event",
+  formula: {
+    name: "SyncEvents",
+    description: "Sync events",
+    parameters: [],
+    execute: async function ([], context) {
+      const url = `${helpers.ApiUrl}/events`;
+      const urlQueryParams = { limit: 100 };
+      return await helpers.syncWithContinuation(context, url, urlQueryParams, helpers.eventsParser);
+    },
+  },
+});
