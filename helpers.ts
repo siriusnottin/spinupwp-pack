@@ -68,6 +68,7 @@ export function sitesParser(sites: types.SiteResponse[]): types.Site[] {
     const { files, database } = backups;
     const siteUrl = `${https.enabled ? 'https' : 'http'}://${domain}`;
     const modifiedSite = {
+      ...site,
       siteId: id,
       server,
       backups: (files || database) ? backups : undefined,
