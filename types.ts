@@ -112,6 +112,7 @@ export interface SiteResponse {
     files: boolean;
     database: boolean;
     paths_to_exclude: string;
+    is_backups_retention_period_enabled: boolean;
     retention_period: number;
     next_run_time: string;
     storage_provider: {
@@ -176,6 +177,7 @@ export interface Site {
     files: boolean;
     database: boolean;
     pathsToExclude: string;
+    isBackupsRetentionPeriodEnabled: boolean;
     retentionPeriod: number;
     nextRunTime: string;
     storageProvider: {

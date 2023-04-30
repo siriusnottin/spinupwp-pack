@@ -84,6 +84,7 @@ const SiteBackupsSchema = coda.makeObjectSchema({
     files: { type: coda.ValueType.Boolean },
     database: { type: coda.ValueType.Boolean },
     pathToExclude: { type: coda.ValueType.String },
+    isBackupsRetentionPeriodEnabled: { type: coda.ValueType.Boolean },
     retentionPeriod: { type: coda.ValueType.Number, codaType: coda.ValueHintType.Duration },
     nextRunTime: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
     storageProvider: {
