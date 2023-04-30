@@ -176,6 +176,7 @@ export interface Site {
     certificateRenews?: string;
   };
   nginx: {
+    name: "nginx";
     uploadsDirectoryProtected: boolean;
     xmlrpcProtected: boolean;
     subdirectoryRewriteInPlace: boolean;

@@ -65,6 +65,7 @@ const SiteAdditionalDomainsSchema = coda.makeObjectSchema({
 
 export const SiteNginxSchema = coda.makeObjectSchema({
   properties: {
+    name: { type: coda.ValueType.String },
     uploadsDirectoryProtected: { type: coda.ValueType.Boolean },
     xmlrpcProtected: { type: coda.ValueType.Boolean },
     subdirectoryRewriteInPlace: { type: coda.ValueType.Boolean },
