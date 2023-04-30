@@ -80,7 +80,7 @@ export function sitesParser(sites: types.SiteResponse[]): types.Site[] {
   });
 }
 
-// return a list of applications
+// formula fn for an application info
 
 // sync table fn for the applications 
 
