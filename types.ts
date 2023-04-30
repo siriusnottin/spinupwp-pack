@@ -131,6 +131,11 @@ export interface SiteResponse {
   wp_plugin_updates: number;
   git: {
     enabled: boolean;
+    repo?: string;
+    branch?: string;
+    deploy_script?: string;
+    push_enabled?: boolean;
+    deployment_url?: string;
   };
   basic_auth: {
     enabled: boolean;
