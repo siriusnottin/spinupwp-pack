@@ -122,6 +122,7 @@ export const SiteSchema = coda.makeObjectSchema({
     domain: { type: coda.ValueType.String },
     additionalDomains: SiteAdditionalDomainsSchema,
     siteUser: { type: coda.ValueType.String },
+    userAuth: { type: coda.ValueType.String },
     phpVersion: { type: coda.ValueType.String },
     publicFolder: { type: coda.ValueType.String },
     isWordpress: { type: coda.ValueType.Boolean },

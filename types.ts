@@ -89,6 +89,7 @@ export interface SiteResponse {
     created_at: string;
   }[];
   site_user: string;
+  user_auth: string;
   php_version: string;
   public_folder: string;
   is_wordpress: boolean;
@@ -150,6 +151,7 @@ export interface Site {
     createdAt: string;
   }[];
   siteUser: string;
+  userAuth: string;
   phpVersion: string;
   publicFolder: string;
   isWordpress: boolean;
