@@ -168,6 +168,7 @@ export interface Site {
   isWordpress: boolean;
   pageCacheEnabled: boolean;
   https: {
+    name: "https"
     enabled: boolean;
     certificatePath?: string;
     privateKeyPath?: string;

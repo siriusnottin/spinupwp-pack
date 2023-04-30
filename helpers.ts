@@ -83,6 +83,7 @@ export function sitesParser(sites: types.SiteResponse[]): types.Site[] {
       ...site,
       siteId: id,
       server,
+      https: { name: "https", ...https },
       pageCacheEnabled: page_cache.enabled,
       backups: (files || database) ? backups : undefined,
       spinupUrl: `${AppUrl}/sites/${id}`,

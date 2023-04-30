@@ -129,6 +129,7 @@ export const SiteSchema = coda.makeObjectSchema({
     pageCacheEnabled: { type: coda.ValueType.Boolean },
     https: {
       type: coda.ValueType.Object, properties: {
+        name: { type: coda.ValueType.String },
         enabled: { type: coda.ValueType.Boolean },
         certificatePath: { type: coda.ValueType.String },
         privateKeyPath: { type: coda.ValueType.String },
