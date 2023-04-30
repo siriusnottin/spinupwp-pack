@@ -75,7 +75,6 @@ export function sitesParser(sites: types.SiteResponse[]): types.Site[] {
       siteUrl,
       siteAdminUrl: (is_wordpress) ? `${siteUrl}/wp-admin` : undefined,
     };
-    delete modifiedSite.id, modifiedSite.server_id; // we dont need these returned in the formula
     return snakeToCamel(modifiedSite) as types.Site;
   });
 }
