@@ -38,7 +38,7 @@ pack.addSyncTable({
     parameters: [],
     execute: async function ([], context) {
       const url = `${helpers.ApiUrl}/sites`;
-      const urlQueryParams = { limit: 1 };
+      const urlQueryParams = { limit: 100 };
       return await helpers.syncWithContinuation(context, url, urlQueryParams, helpers.sitesParser);
     },
   },
