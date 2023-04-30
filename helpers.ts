@@ -60,16 +60,17 @@ export function serversParser(servers: types.ServerResponse[]): types.Server[] {
 
 export function sitesParser(sites: types.SiteResponse[]): types.Site[] {
   return sites.map((site) => {
-    const { id, https, domain, is_wordpress, ...rest } = site;
+    const { id, https, domain, backups, is_wordpress, ...rest } = site;
     const server: types.Site["server"] = {
       serverId: site.server_id,
       name: "Not found",
     }
+    const { files, database } = backups;
     const siteUrl = `${https.enabled ? 'https' : 'http'}://${domain}`;
     const modifiedSite = {
       siteId: id,
       server,
-      ...site,
+      backups: (files || database) ? backups : undefined,
       spinupUrl: `${AppUrl}/sites/${id}`,
       siteUrl,
       siteAdminUrl: (is_wordpress) ? `${siteUrl}/wp-admin` : undefined,

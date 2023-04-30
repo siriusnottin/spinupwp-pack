@@ -183,7 +183,7 @@ export interface Site {
       region: string;
       bucket: string;
     };
-  };
+  } | null;
   wpCoreUpdate: boolean;
   wpThemeUpdates: number;
   wpPluginUpdates: number;
