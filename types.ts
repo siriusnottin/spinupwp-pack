@@ -211,6 +211,7 @@ export interface Site {
     deploymentUrl: string;
   };
   basicAuth: {
+    name: "Basic Auth";
     enabled: boolean;
     username?: string;
   };

@@ -111,6 +111,7 @@ const SiteGitSchema = coda.makeObjectSchema({
 
 const SiteBasicAuthSchema = coda.makeObjectSchema({
   properties: {
+    name: { type: coda.ValueType.String },
     enabled: { type: coda.ValueType.Boolean },
     username: { type: coda.ValueType.String },
   },
