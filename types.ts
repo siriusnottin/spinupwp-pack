@@ -180,7 +180,7 @@ export interface Site {
     subdirectoryRewriteInPlace: boolean;
   };
   database: {
-    id: number;
+    databaseId: number;
     userId: number;
     tablePrefix: string;
   };
