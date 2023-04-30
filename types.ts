@@ -125,11 +125,7 @@ export interface SiteResponse {
   wp_theme_updates: number;
   wp_plugin_updates: number;
   git: {
-    repo: string;
-    branch: string;
-    deploy_script: string;
-    push_enabled: boolean;
-    deployment_url: string;
+    enabled: boolean;
   };
   basic_auth: {
     enabled: boolean;
@@ -190,6 +186,7 @@ export interface Site {
   wpThemeUpdates: number;
   wpPluginUpdates: number;
   git: {
+    enabled: boolean;
     repo: string;
     branch: string;
     deployScript: string;

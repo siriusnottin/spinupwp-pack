@@ -99,6 +99,7 @@ const SiteBackupsSchema = coda.makeObjectSchema({
 
 const SiteGitSchema = coda.makeObjectSchema({
   properties: {
+    enabled: { type: coda.ValueType.Boolean },
     repo: { type: coda.ValueType.String },
     branch: { type: coda.ValueType.String },
     deployScript: { type: coda.ValueType.String },
