@@ -119,11 +119,11 @@ export interface SiteResponse {
     paths_to_exclude: string;
     is_backups_retention_period_enabled: boolean;
     retention_period: number;
-    next_run_time: string;
+    next_run_time: string | null;
     storage_provider: {
-      id: number;
-      region: string;
-      bucket: string;
+      id: number | null;
+      region: string | null;
+      bucket: string | null;
     };
   };
   wp_core_update: boolean;
@@ -134,7 +134,7 @@ export interface SiteResponse {
   };
   basic_auth: {
     enabled: boolean;
-    username: string;
+    username?: string;
   };
   created_at: string;
   status: SiteStatus;
@@ -185,7 +185,7 @@ export interface Site {
     pathsToExclude: string;
     isBackupsRetentionPeriodEnabled: boolean;
     retentionPeriod: number;
-    nextRunTime: string;
+    nextRunTime: string | null;
     storageProvider: {
       id: number;
       region: string;
@@ -205,7 +205,7 @@ export interface Site {
   };
   basicAuth: {
     enabled: boolean;
-    username: string;
+    username?: string;
   };
   createdAt: string;
   status: SiteStatus;
@@ -229,10 +229,10 @@ enum EventStatus {
 export interface EventResponse {
   id: number;
   initiated_by: string;
-  server_id: number;
+  server_id?: number;
   name: string;
   status: EventStatus;
-  output: any | null;
+  output: string | null;
   created_at: string;
   started_at: string;
   finished_at: string;
@@ -244,7 +244,7 @@ export interface Event {
   serverId: number;
   name: string;
   status: EventStatus;
-  output: any | null;
+  output: string | null;
   createdAt: string;
   startedAt: string;
   finishedAt: string;
