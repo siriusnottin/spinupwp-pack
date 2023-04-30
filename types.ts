@@ -77,7 +77,7 @@ enum SiteStatus {
   Failed = "failed",
 }
 
-export type SiteResponse = {
+export interface SiteResponse {
   id: number;
   server_id: number;
   domain: string;
