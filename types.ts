@@ -98,6 +98,10 @@ export interface SiteResponse {
   };
   https: {
     enabled: boolean;
+    certificate_path?: string;
+    private_key_path?: string;
+    certificate_expires?: string;
+    certificate_renews?: string;
   };
   nginx: {
     uploads_directory_protected: boolean;
@@ -160,6 +164,10 @@ export interface Site {
   };
   https: {
     enabled: boolean;
+    certificatePath?: string;
+    privateKeyPath?: string;
+    certificateExpires?: string;
+    certificateRenews?: string;
   };
   nginx: {
     uploadsDirectoryProtected: boolean;

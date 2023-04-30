@@ -127,7 +127,15 @@ export const SiteSchema = coda.makeObjectSchema({
     publicFolder: { type: coda.ValueType.String },
     isWordpress: { type: coda.ValueType.Boolean },
     pageCache: { type: coda.ValueType.Object, properties: { enabled: { type: coda.ValueType.Boolean } } },
-    https: { type: coda.ValueType.Object, properties: { enabled: { type: coda.ValueType.Boolean } } },
+    https: {
+      type: coda.ValueType.Object, properties: {
+        enabled: { type: coda.ValueType.Boolean },
+        certificatePath: { type: coda.ValueType.String },
+        privateKeyPath: { type: coda.ValueType.String },
+        certificateExpires: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
+        certificateRenews: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
+      }
+    },
     nginx: SiteNginxSchema,
     database: SiteDatabaseSchema,
     backups: SiteBackupsSchema,
