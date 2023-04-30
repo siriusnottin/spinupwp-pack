@@ -60,7 +60,7 @@ export function serversParser(servers: types.ServerResponse[]): types.Server[] {
 
 export function sitesParser(sites: types.SiteResponse[]): types.Site[] {
   return sites.map((site) => {
-    const { id, https, domain, backups, is_wordpress, ...rest } = site;
+    const { id, https, domain, backups, is_wordpress } = site;
     const server: types.Site["server"] = {
       serverId: site.server_id,
       name: "Not found",
