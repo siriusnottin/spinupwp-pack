@@ -203,6 +203,7 @@ export interface Site {
   wpThemeUpdates: number;
   wpPluginUpdates: number;
   git: {
+    name: "Git";
     enabled: boolean;
     repo: string;
     branch: string;
