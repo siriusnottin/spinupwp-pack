@@ -21,6 +21,7 @@ Manage your servers and applications in Coda.
 ## Changelog
 
 v1 - Initial release
+
 v2 - Added Events table
 
 ## License
