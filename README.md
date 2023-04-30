@@ -6,6 +6,18 @@ Manage your servers and applications in Coda.
 
 ## Features
 
+## Todo
+
+- [ ] Convert `Server.database.port` type string into a number
+- [ ] Add pagination parameter to sync table
+- [ ] New table for Events
+- [ ] Site/Server/Event formula
+- [ ] Site/Server/Event card
+- [ ] Site/Server action buttons
+- [ ] Refactor:
+  - [ ] Better type checking
+- [ ] Error handling
+
 ## Changelog
 
 v0.1.0 - Initial release
