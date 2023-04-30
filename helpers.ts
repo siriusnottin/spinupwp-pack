@@ -72,7 +72,7 @@ export function serversParser(servers: types.ServerResponse[]): types.Server[] {
 
 export function sitesParser(sites: types.SiteResponse[]): types.Site[] {
   return sites.map((site) => {
-    const { id, https, domain, backups, is_wordpress } = site;
+    const { id, https, domain, page_cache, backups, is_wordpress } = site;
     const server: types.Site["server"] = {
       serverId: site.server_id,
       name: "Not found",
@@ -83,6 +83,7 @@ export function sitesParser(sites: types.SiteResponse[]): types.Site[] {
       ...site,
       siteId: id,
       server,
+      pageCacheEnabled: page_cache.enabled,
       backups: (files || database) ? backups : undefined,
       spinupUrl: `${AppUrl}/sites/${id}`,
       siteUrl,

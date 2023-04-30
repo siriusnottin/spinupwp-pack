@@ -126,7 +126,7 @@ export const SiteSchema = coda.makeObjectSchema({
     phpVersion: { type: coda.ValueType.String },
     publicFolder: { type: coda.ValueType.String },
     isWordpress: { type: coda.ValueType.Boolean },
-    pageCache: { type: coda.ValueType.Object, properties: { enabled: { type: coda.ValueType.Boolean } } },
+    pageCacheEnabled: { type: coda.ValueType.Boolean },
     https: {
       type: coda.ValueType.Object, properties: {
         enabled: { type: coda.ValueType.Boolean },

@@ -166,9 +166,7 @@ export interface Site {
   phpVersion: string;
   publicFolder: string;
   isWordpress: boolean;
-  pageCache: {
-    enabled: boolean;
-  };
+  pageCacheEnabled: boolean;
   https: {
     enabled: boolean;
     certificatePath?: string;
