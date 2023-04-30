@@ -7,7 +7,7 @@ const ServerDiskSpaceSchema = coda.makeObjectSchema({
     total: { type: coda.ValueType.Number },
     available: { type: coda.ValueType.Number },
     used: { type: coda.ValueType.Number },
-    updatedAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
+    updatedAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.DateTime },
   }
 });
 
@@ -59,7 +59,7 @@ const SiteAdditionalDomainsSchema = coda.makeObjectSchema({
         enabled: { type: coda.ValueType.Boolean },
       },
     },
-    createdAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
+    createdAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.DateTime },
   },
 });
 
@@ -87,7 +87,7 @@ const SiteBackupsSchema = coda.makeObjectSchema({
     pathToExclude: { type: coda.ValueType.String },
     isBackupsRetentionPeriodEnabled: { type: coda.ValueType.Boolean },
     retentionPeriod: { type: coda.ValueType.Number, codaType: coda.ValueHintType.Duration },
-    nextRunTime: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
+    nextRunTime: { type: coda.ValueType.String, codaType: coda.ValueHintType.DateTime },
     storageProvider: {
       type: coda.ValueType.Object, properties: {
         storageProviderId: { type: coda.ValueType.Number },
@@ -136,8 +136,8 @@ export const SiteSchema = coda.makeObjectSchema({
         enabled: { type: coda.ValueType.Boolean },
         certificatePath: { type: coda.ValueType.String },
         privateKeyPath: { type: coda.ValueType.String },
-        certificateExpires: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
-        certificateRenews: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
+        certificateExpires: { type: coda.ValueType.String, codaType: coda.ValueHintType.DateTime },
+        certificateRenews: { type: coda.ValueType.String, codaType: coda.ValueHintType.DateTime },
       }
     },
     nginx: SiteNginxSchema,
@@ -171,9 +171,9 @@ export const EventSchema = coda.makeObjectSchema({
     name: { type: coda.ValueType.String },
     status: { type: coda.ValueType.String },
     output: { type: coda.ValueType.String },
-    createdAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
-    startedAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
-    finishedAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.Date },
+    createdAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.DateTime },
+    startedAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.DateTime },
+    finishedAt: { type: coda.ValueType.String, codaType: coda.ValueHintType.DateTime },
   },
   idProperty: "eventId",
   displayProperty: "name",
