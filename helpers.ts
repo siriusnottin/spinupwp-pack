@@ -5,7 +5,7 @@ import * as types from "./types";
 export const AppUrl = "https://spinupwp.app";
 export const ApiUrl = "https://api.spinupwp.app/v1";
 
-async function syncWithContinuation(context: coda.SyncExecutionContext, baseUrl: string, urlQueryParams: { [key: string]: any }, parser: (data: any) => any): Promise<coda.GenericSyncFormulaResult> {
+export async function syncWithContinuation(context: coda.SyncExecutionContext, baseUrl: string, urlQueryParams: { [key: string]: any }, parser: (data: any) => any): Promise<coda.GenericSyncFormulaResult> {
   // high-end fn that handles sync with continuation
   let url = (context.sync.continuation?.nextPageUrl as string | undefined) || baseUrl;
   url = coda.withQueryParams(url, urlQueryParams);
@@ -35,7 +35,7 @@ function BytesToGigaBytes(bytes: number): number {
   return bytes / 1000000000;
 }
 
-function serversParser(servers: types.ServerResponse[]): types.Server[] {
+export function serversParser(servers: types.ServerResponse[]): types.Server[] {
   return servers.map((server) => {
     const { id, disk_space, ...rest } = server;
     const parsedDiskSpace = {};
@@ -52,19 +52,13 @@ function serversParser(servers: types.ServerResponse[]): types.Server[] {
   });
 }
 
-export async function SyncServers(context: coda.SyncExecutionContext, serverId?: number): Promise<coda.GenericSyncFormulaResult> {
-  const url = `${ApiUrl}/servers`;
-  const urlQueryParams = { limit: 10 };
-  return await syncWithContinuation(context, url, urlQueryParams, serversParser);
-}
-
 // formula fn for a server info
 
 // ====================
 // SITES
 // ====================
 
-function sitesParser(sites: types.SiteResponse[]): types.Site[] {
+export function sitesParser(sites: types.SiteResponse[]): types.Site[] {
   return sites.map((site) => {
     const { id, https, domain, is_wordpress, ...rest } = site;
     const server: types.Site["server"] = {
@@ -83,12 +77,6 @@ function sitesParser(sites: types.SiteResponse[]): types.Site[] {
     delete modifiedSite.id, modifiedSite.server_id; // we dont need these returned in the formula
     return snakeToCamel(modifiedSite) as types.Site;
   });
-}
-
-export async function SyncSites(context: coda.SyncExecutionContext): Promise<coda.GenericSyncFormulaResult> {
-  const url = `${ApiUrl}/sites`;
-  const urlQueryParams = { limit: 100 };
-  return await syncWithContinuation(context, url, urlQueryParams, sitesParser);
 }
 
 // return a list of applications

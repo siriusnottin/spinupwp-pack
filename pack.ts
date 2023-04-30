@@ -21,7 +21,9 @@ pack.addSyncTable({
     description: "Sync servers",
     parameters: [],
     execute: async function ([], context) {
-      return helpers.SyncServers(context);
+      const url = `${helpers.ApiUrl}/servers`;
+      const urlQueryParams = { limit: 1 };
+      return await helpers.syncWithContinuation(context, url, urlQueryParams, helpers.serversParser);
     },
   },
 });
@@ -35,7 +37,9 @@ pack.addSyncTable({
     description: "Sync sites",
     parameters: [],
     execute: async function ([], context) {
-      return helpers.SyncSites(context);
+      const url = `${helpers.ApiUrl}/sites`;
+      const urlQueryParams = { limit: 1 };
+      return await helpers.syncWithContinuation(context, url, urlQueryParams, helpers.sitesParser);
     },
   },
 });
