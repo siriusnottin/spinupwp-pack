@@ -87,7 +87,7 @@ export function sitesParser(sites: types.SiteResponse[]): types.Site[] {
       nginx: { name: "nginx", ...nginx },
       pageCacheEnabled: page_cache.enabled,
       backups: (files || database) ? backups : undefined,
-      basicAuth: { name: "Basic Auth", ...basic_auth },
+      basicAuth: (basic_auth.enabled) ? { name: "Basic Auth", ...basic_auth } : undefined,
       spinupUrl: `${AppUrl}/sites/${id}`,
       siteUrl,
       siteAdminUrl: (is_wordpress) ? `${siteUrl}/wp-admin` : undefined,
