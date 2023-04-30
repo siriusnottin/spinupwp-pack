@@ -19,12 +19,24 @@ export async function syncWithContinuation(context: coda.SyncExecutionContext, b
 }
 
 function snakeToCamel(obj: { [key: string]: any }) {
-  // transform snake_case to camelCase
-  return Object.fromEntries(
-    Object.entries(obj).map(([key, value]) => {
-      return [key.replace(/_(\w)/g, (_, c) => c.toUpperCase()), value];
-    })
-  );
+  // transform obj key from snake_case to camelCase (e.g. server_id -> serverId)
+
+  if (obj === null || obj === undefined) {
+    return obj;
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map(snakeToCamel);
+  }
+
+  if (typeof obj === "object") {
+    return Object.fromEntries(
+      Object.entries(obj).map(([key, value]) => {
+        return [key.replace(/_(\w)/g, (_, c) => c.toUpperCase()), snakeToCamel(value)];
+      })
+    );
+  }
+  return obj;
 }
 
 // ====================
