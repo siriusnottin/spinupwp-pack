@@ -20,7 +20,7 @@ Manage your servers and applications in Coda.
 
 ## Changelog
 
-v0.1.0 - Initial release
+v1 - Initial release
 
 ## License
 
