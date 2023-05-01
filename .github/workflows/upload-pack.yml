@@ -1,0 +1,32 @@
+name: 'Upload Coda pack'
+run-name: 'Upload Coda pack for ${{ github.repository }}'
+
+on:
+  push:
+    branches:
+      - release/*
+  workflow_dispatch:
+
+jobs:
+  upload:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [ '18.x' ]
+    steps:
+    - name: 'Checkout repository'
+      uses: actions/checkout@v3
+
+    - name: 'Use Node.js v${{ matrix.node-version }}'
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: 'Install dependencies'
+      run: npm install
+
+    - name: 'Upload pack'
+      uses: siriusnottin/upload-coda-pack@main
+      with:
+        codaApiToken: ${{ secrets.CODA_API_TOKEN }}
