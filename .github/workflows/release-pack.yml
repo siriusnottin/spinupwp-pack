@@ -1,0 +1,47 @@
+name: 'Release pack'
+run-name: 'Release pack for ${{ github.repository }}'
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      packVersion:
+        description: 'Uploaded pack version to release'
+        required: false
+      notes:
+        description: 'Release notes'
+        required: true
+
+jobs:
+  release-pack:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [ '18.x' ]
+    steps:
+    - name: 'Checkout repository'
+      uses: actions/checkout@v3
+
+    - name: 'Use Node.js v${{ matrix.node-version }}'
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: 'Install dependencies'
+      run: npm install
+
+    - name: 'Upload pack'
+      id: upload
+      uses: siriusnottin/upload-coda-pack@main
+      with:
+        codaApiToken: ${{ secrets.CODA_API_TOKEN }}
+
+    - name: 'Release pack'
+      uses: siriusnottin/release-coda-pack@main
+      with:
+        codaApiToken: ${{ secrets.CODA_API_TOKEN }}
+        packVersion: ${{ steps.upload.outputs.packVersion }}
+        notes: ${{ github.event.pull_request.title }}
