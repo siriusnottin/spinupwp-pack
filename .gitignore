@@ -1,5 +1,6 @@
 # Coda.io
 .coda*
+!.coda-pack.json
 
 # Other
 *.paw
